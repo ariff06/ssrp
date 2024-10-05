@@ -30,7 +30,7 @@ const imageUpload = document.getElementById('imageUpload');
     function resetImagePosition() {
         currentScale = 1;
         currentX = 0;
-        currentY = 0;
+        currentY = 0; 
         updateImageTransform();
     }
 
