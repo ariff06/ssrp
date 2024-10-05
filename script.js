@@ -17,7 +17,7 @@ const imageUpload = document.getElementById('imageUpload');
 
     imageUpload.addEventListener('change', function(e) {
         const file = e.target.files[0];
-        if (file) {
+        if (file) { 
             const reader = new FileReader();
             reader.onload = function(e) {
                 uploadedImage.src = e.target.result;

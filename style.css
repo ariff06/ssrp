@@ -175,7 +175,7 @@ body, html {
         padding: 6px;
         font-size: 12px;
     }
-    .text-controls {
+    .text-controls { 
         flex-direction: column;
         align-items: flex-start;
     }
