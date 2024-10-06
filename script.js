@@ -10,6 +10,11 @@ const imageUpload = document.getElementById('imageUpload');
     const fontSizeValue = document.getElementById('fontSizeValue');
     const textShadowCheckbox = document.getElementById('textShadow');
     const controls = document.querySelector('.controls');
+    const textStrokeCheckbox = document.getElementById('textStroke');
+    const strokeColorInput = document.getElementById('strokeColor');
+    const strokeWidthInput = document.getElementById('strokeWidth');
+    const strokeWidthValue = document.getElementById('strokeWidthValue');
+    
 
     let currentScale = 1;
     let currentX = 0;
@@ -45,7 +50,7 @@ const imageUpload = document.getElementById('imageUpload');
             const p = document.createElement('p');
             if (line.startsWith('*')) {
                 p.classList.add('special');
-                p.textContent = line; // Keep the asterisk
+                p.textContent = line.substring(1); // Hapus asterisk dari teks yang ditampilkan
             } else {
                 p.textContent = line;
             }
@@ -53,6 +58,22 @@ const imageUpload = document.getElementById('imageUpload');
             if (textShadowCheckbox.checked) {
                 p.style.textShadow = '2px 4px 3px rgba(0,0,0,1)';
             } else {
+                p.style.textShadow = 'none';
+            }
+            if (textStrokeCheckbox.checked) {
+                const strokeWidth = parseFloat(strokeWidthInput.value);
+                p.style.webkitTextStroke = `${strokeWidth}px ${strokeColorInput.value}`;
+                p.style.textStroke = `${strokeWidth}px ${strokeColorInput.value}`;
+                // Tambahkan efek text-shadow untuk memperkuat stroke
+                p.style.textShadow = `
+                    -${strokeWidth}px -${strokeWidth}px 0 ${strokeColorInput.value},
+                    ${strokeWidth}px -${strokeWidth}px 0 ${strokeColorInput.value},
+                    -${strokeWidth}px ${strokeWidth}px 0 ${strokeColorInput.value},
+                    ${strokeWidth}px ${strokeWidth}px 0 ${strokeColorInput.value}
+                `;
+            } else {
+                p.style.webkitTextStroke = 'none';
+                p.style.textStroke = 'none';
                 p.style.textShadow = 'none';
             }
             overlay.appendChild(p);
@@ -69,6 +90,22 @@ const imageUpload = document.getElementById('imageUpload');
     });
 
     textShadowCheckbox.addEventListener('change', function() {
+        updateTextOverlay(topTextInput, topTextOverlay);
+        updateTextOverlay(bottomTextInput, bottomTextOverlay);
+    });
+
+    textStrokeCheckbox.addEventListener('change', function() {
+        updateTextOverlay(topTextInput, topTextOverlay);
+        updateTextOverlay(bottomTextInput, bottomTextOverlay);
+    });
+    
+    strokeColorInput.addEventListener('input', function() {
+        updateTextOverlay(topTextInput, topTextOverlay);
+        updateTextOverlay(bottomTextInput, bottomTextOverlay);
+    });
+    
+    strokeWidthInput.addEventListener('input', function() {
+        strokeWidthValue.textContent = `${this.value}px`;
         updateTextOverlay(topTextInput, topTextOverlay);
         updateTextOverlay(bottomTextInput, bottomTextOverlay);
     });

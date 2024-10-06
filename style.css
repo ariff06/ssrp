@@ -183,3 +183,29 @@ body, html {
         margin-bottom: 10px; 
     }
 }
+
+.stroke-control {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.stroke-control label {
+    margin-right: 10px;
+}
+
+.stroke-control input[type="color"] {
+    margin: 0 5px;
+}
+
+.stroke-control input[type="range"] {
+    width: 80px;
+    margin: 0 5px;
+}
+
+@media (max-width: 600px) {
+    .stroke-control {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}

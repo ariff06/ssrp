@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSRP SAMP Image Editor</title>
+    <title>ssrp pantek</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -32,6 +32,13 @@
                 <div class="shadow-control">
                     <label for="textShadow">Bayangan Teks:</label>
                     <input type="checkbox" id="textShadow">
+                </div>
+                <div class="stroke-control">
+                    <label for="textStroke">Stroke Teks:</label>
+                    <input type="checkbox" id="textStroke">
+                    <input type="color" id="strokeColor" value="#000000">
+                    <input type="range" id="strokeWidth" min="0.1" max="2" value="0.5" step="0.1">
+                    <span id="strokeWidthValue">0.5px</span>
                 </div>
             </div>
             <textarea id="topTextInput" class="text-input" rows="3" placeholder="Masukkan teks atas (maks. 6 baris)"></textarea>
