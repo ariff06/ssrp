@@ -1,3 +1,4 @@
+
 :root {
     --primary-color: #00ffff;
     --secondary-color: #ff00ff;
@@ -40,6 +41,20 @@ body, html {
     width: 800px;
     height: 600px;
     overflow: hidden;
+}
+
+#imageContainer::after {
+    content: '';
+    position: absolute;
+    right: 10px; 
+    bottom: 10px; 
+    background-image: url('icao.png'); 
+    background-size: 150px; 
+    background-repeat: no-repeat; 
+    opacity: 0.1;
+    width: 150px; 
+    height: 150px; 
+    pointer-events: none;
 }
 
 #uploadedImage {
@@ -180,32 +195,6 @@ body, html {
         align-items: flex-start;
     }
     .font-size-control, .shadow-control {
-        margin-bottom: 10px; 
-    }
-}
-
-.stroke-control {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-}
-
-.stroke-control label {
-    margin-right: 10px;
-}
-
-.stroke-control input[type="color"] {
-    margin: 0 5px;
-}
-
-.stroke-control input[type="range"] {
-    width: 80px;
-    margin: 0 5px;
-}
-
-@media (max-width: 600px) {
-    .stroke-control {
-        margin-left: 0;
-        margin-top: 10px;
+        margin-bottom: 10px;
     }
 }

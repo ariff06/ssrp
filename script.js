@@ -10,11 +10,6 @@ const imageUpload = document.getElementById('imageUpload');
     const fontSizeValue = document.getElementById('fontSizeValue');
     const textShadowCheckbox = document.getElementById('textShadow');
     const controls = document.querySelector('.controls');
-    const textStrokeCheckbox = document.getElementById('textStroke');
-    const strokeColorInput = document.getElementById('strokeColor');
-    const strokeWidthInput = document.getElementById('strokeWidth');
-    const strokeWidthValue = document.getElementById('strokeWidthValue');
-    
 
     let currentScale = 1;
     let currentX = 0;
@@ -22,7 +17,7 @@ const imageUpload = document.getElementById('imageUpload');
 
     imageUpload.addEventListener('change', function(e) {
         const file = e.target.files[0];
-        if (file) { 
+        if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
                 uploadedImage.src = e.target.result;
@@ -35,7 +30,7 @@ const imageUpload = document.getElementById('imageUpload');
     function resetImagePosition() {
         currentScale = 1;
         currentX = 0;
-        currentY = 0; 
+        currentY = 0;
         updateImageTransform();
     }
 
@@ -50,31 +45,15 @@ const imageUpload = document.getElementById('imageUpload');
             const p = document.createElement('p');
             if (line.startsWith('*')) {
                 p.classList.add('special');
-                p.textContent = line.substring(1); // Hapus asterisk dari teks yang ditampilkan
+                p.textContent = line; // Keep the asterisk
             } else {
                 p.textContent = line;
             }
             p.style.fontSize = `${fontSizeSlider.value}px`;
             if (textShadowCheckbox.checked) {
-                p.style.textShadow = '2px 4px 3px rgba(0,0,0,1)';
+                p.style.textShadow += '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 2px 4px 3px rgba(0,0,0,1)';
             } else {
-                p.style.textShadow = 'none';
-            }
-            if (textStrokeCheckbox.checked) {
-                const strokeWidth = parseFloat(strokeWidthInput.value);
-                p.style.webkitTextStroke = `${strokeWidth}px ${strokeColorInput.value}`;
-                p.style.textStroke = `${strokeWidth}px ${strokeColorInput.value}`;
-                // Tambahkan efek text-shadow untuk memperkuat stroke
-                p.style.textShadow = `
-                    -${strokeWidth}px -${strokeWidth}px 0 ${strokeColorInput.value},
-                    ${strokeWidth}px -${strokeWidth}px 0 ${strokeColorInput.value},
-                    -${strokeWidth}px ${strokeWidth}px 0 ${strokeColorInput.value},
-                    ${strokeWidth}px ${strokeWidth}px 0 ${strokeColorInput.value}
-                `;
-            } else {
-                p.style.webkitTextStroke = 'none';
-                p.style.textStroke = 'none';
-                p.style.textShadow = 'none';
+                p.style.textShadow += '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000';
             }
             overlay.appendChild(p);
         });
@@ -90,22 +69,6 @@ const imageUpload = document.getElementById('imageUpload');
     });
 
     textShadowCheckbox.addEventListener('change', function() {
-        updateTextOverlay(topTextInput, topTextOverlay);
-        updateTextOverlay(bottomTextInput, bottomTextOverlay);
-    });
-
-    textStrokeCheckbox.addEventListener('change', function() {
-        updateTextOverlay(topTextInput, topTextOverlay);
-        updateTextOverlay(bottomTextInput, bottomTextOverlay);
-    });
-    
-    strokeColorInput.addEventListener('input', function() {
-        updateTextOverlay(topTextInput, topTextOverlay);
-        updateTextOverlay(bottomTextInput, bottomTextOverlay);
-    });
-    
-    strokeWidthInput.addEventListener('input', function() {
-        strokeWidthValue.textContent = `${this.value}px`;
         updateTextOverlay(topTextInput, topTextOverlay);
         updateTextOverlay(bottomTextInput, bottomTextOverlay);
     });
